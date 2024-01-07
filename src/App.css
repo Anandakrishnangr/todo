@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+.splashtypoanimate {
+  animation: letterSpacingAnimation 3s linear forwards; /* Adjust the duration as needed */
+}
+
+@keyframes letterSpacingAnimation {
+  0% {
+    letter-spacing: 20px;
+  }
+  50% {
+    letter-spacing: 10px;
+  }
+  100% {
+    letter-spacing: 5px;
+  }
+}
