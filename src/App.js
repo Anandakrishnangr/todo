@@ -15,14 +15,10 @@ function App() {
   let dispatch = useDispatch()
   console.log(splash)
   useEffect(() => {
-    axios.get(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/kochi?unitGroup=metric&key=7R68K38G6VC25U6NEDH8TY62E&contentType=json`).then((res) => {
-      console.log(res)
-    }).catch((err) => {
-      console.log(err)
-    })
+    
     setTimeout(() => {
       dispatch(updateApp(false))
-    }, 3400);
+    }, 400);
     return () => {
 
     }

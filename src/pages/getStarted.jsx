@@ -2,6 +2,8 @@ import { Box, Typography } from '@mui/material';
 import React from 'react';
 import theme from '../config/Theme';
 import { Link } from 'react-router-dom';
+import WeatherCard from '../components/WeatherCard';
+import TodoList from './Todo';
 
 const GetStarted = () => {
     return (
@@ -31,7 +33,9 @@ const GetStarted = () => {
                         fontSize: '24px', // Adjusted font size for better readability
                     }}
                 >
+                    <WeatherCard/>
                     Get Started!
+                    <TodoList/>
                     <Link to={'/signin'} >Signin</Link>
                 </Typography>
             </Box>
