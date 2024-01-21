@@ -14,11 +14,11 @@ import {
 } from "@mui/material";
 import theme from "../config/Theme";
 import AddTask from "./AddTask";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { deleteTask } from "../redux/Todo/todoSlice";
 
 const TodoList = () => {
-  let taskList = useSelector((state) => state.todo.value.data);
+  let taskList = useSelector((state) => state.todo.data);
   const [selectedTasks, setSelectedTasks] = useState([]);
   const [addModalOpen, setAddModalOpen] = useState(false);
   const handleCheckboxChange = (taskId) => {
@@ -28,6 +28,8 @@ const TodoList = () => {
 
     setSelectedTasks(newSelectedTasks);
   };
+  const [selectedId, setSelectedId] = useState("");
+  let dispatch = useDispatch();
 
   const handleDelete = () => {
     // Implement delete logic using selectedTasks
@@ -48,7 +50,7 @@ const TodoList = () => {
   };
 
   return (
-    <Box >
+    <Box>
       {/* <Typography
         sx={{
           textAlign: "center",
@@ -77,6 +79,7 @@ const TodoList = () => {
               <TableCell>Title</TableCell>
               <TableCell>Description</TableCell>
               <TableCell>Created On</TableCell>
+              <TableCell>Edit</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -87,7 +90,11 @@ const TodoList = () => {
                   <TableCell>
                     <Checkbox
                       checked={selectedTasks.includes(task.id)}
-                      onChange={() => handleCheckboxChange(task.id)}
+                      onChange={() => {
+                        setSelectedId(task.id);
+                        console.log(task.id);
+                        handleCheckboxChange(task.id);
+                      }}
                     />
                   </TableCell>
                   <TableCell> Task {task.id}</TableCell>
@@ -96,16 +103,24 @@ const TodoList = () => {
                 </TableRow>
               );
             })}
-            {taskList.length === 0 ? <TableRow sx={{
-              height:"600px"
-            }}> 
-              <TableCell colSpan={'4'}
+            {taskList.length === 0 ? (
+              <TableRow
                 sx={{
-                  textAlign: "center"
-                }} >
-                No Data ! Add a task
-              </TableCell>
-            </TableRow> : ""}
+                  height: "500px",
+                }}
+              >
+                <TableCell
+                  colSpan={"4"}
+                  sx={{
+                    textAlign: "center",
+                  }}
+                >
+                  No Data ! Add a task
+                </TableCell>
+              </TableRow>
+            ) : (
+              ""
+            )}
           </TableBody>
         </Table>
       </TableContainer>
@@ -114,7 +129,11 @@ const TodoList = () => {
           variant="contained"
           color="secondary"
           //   startIcon={<DeleteIcon />}
-          onClick={handleDelete}
+          onClick={() => {
+            handleDelete();
+            dispatch(deleteTask(selectedTasks));
+            // console.log(selectedTasks, selectedId);
+          }}
           disabled={selectedTasks.length === 0}
         >
           Delete
