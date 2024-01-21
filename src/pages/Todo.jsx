@@ -122,20 +122,16 @@ const TodoList = () => {
               <TableCell colSpan={'4'}
                 sx={{
                   height: "500px",
+                  textAlign: "center",
                 }}
               >
-                <TableCell
-                  colSpan={"4"}
-                  sx={{
-                    textAlign: "center",
-                  }}
-                >
+              
                   No Data ! Add a task
                 </TableCell>
               </TableRow>
-            ) : (
+             : 
               ""
-            )}
+            }
           </TableBody>
         </Table>
       </TableContainer>
