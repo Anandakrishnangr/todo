@@ -1,35 +1,66 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Typography, TextField, Button } from '@mui/material';
 import theme from '../config/Theme';
+import { useDispatch, useSelector } from 'react-redux';
+import { addUser } from '../redux/Todo/userSlice';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
+
+    let dispatch = useDispatch()
+    let [data, setData] = useState({
+        userName: '',
+        errorStatus: false,
+        errorMessage: ''
+    })
+    let navigate = useNavigate()
+    let userStates = useSelector((state) => state.user.UserName)
+    console.log(userStates)
+
+
+    const handle = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+        }else{
+            return
+        }
+        if (data.userName.length) {
+            dispatch(addUser(data.userName))
+            // navigate('/')
+        } else {
+
+        }
+    }
+
     return (
         <Box
+            // component="form"
+            // onSubmit={(e)=>handle(e)}
             sx={{
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
                 height: '100vh',
-                bgcolor: theme.palette.primary.main, // Use the default background color from theme
+                bgcolor: theme.palette.primary.main,
             }}
         >
             <Box
                 component="form"
                 sx={{
-                    width: '80%', // Adjusted width for better responsiveness
-                    maxWidth: '400px', // Added max-width for larger screens
-                    p: '24px', // Added padding for better spacing
-                    borderRadius: '8px', // Added border radius for a nicer look
-                    bgcolor: 'white', // Set background color to white
-                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Added box shadow for a subtle lift
+                    width: '80%',
+                    maxWidth: '400px',
+                    p: '24px',
+                    borderRadius: '8px',
+                    bgcolor: 'white',
+                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                 }}
             >
                 <Typography
                     variant="h5"
-                    color={theme.palette.primary.main} // Use the primary color for the text
+                    color={theme.palette.primary.main}
                     sx={{
                         fontWeight: '600',
-                        mb: '16px', // Added margin bottom for spacing
+                        mb: '16px',
                     }}
                 >
                     Get Started !
@@ -39,19 +70,16 @@ const LoginPage = () => {
                     variant="outlined"
                     fullWidth
                     margin="dense"
-                    sx={{ mb: '16px' }} // Added margin bottom for spacing
+                    sx={{ mb: '16px' }}
+                    onChange={(e) => setData((prev) => ({
+                        userName: e.target.value,
+                        errorStatus: false,
+                        errorMessage: ''
+                    }))}
+                    onKeyDown={handle}
                 />
-                {/* <TextField
-                    label="Password"
-                    type="password"
-                    variant="outlined"
-                    fullWidth
-                    margin="dense"
-                    sx={{ mb: '24px' }} // Added margin bottom for spacing
-                /> */}
-                <Button variant="contained" color="primary" fullWidth>
-                    Next
-                </Button>
+
+
             </Box>
         </Box>
     );

@@ -21,6 +21,7 @@ const Splash = () => {
                 fontWeight: 900,
                 fontSize: '48px',
                 textDecoration: "none",
+                color:"white"
             
 
             }}>TO DO LIST</Typography>

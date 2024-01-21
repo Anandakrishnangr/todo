@@ -35,8 +35,6 @@ const GetStarted = () => {
                 >
                     <WeatherCard/>
                     Get Started!
-                    <TodoList/>
-                    <Link to={'/signin'} >Signin</Link>
                 </Typography>
             </Box>
         </Box>

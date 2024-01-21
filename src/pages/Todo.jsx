@@ -9,27 +9,13 @@ import {
   Paper,
   Checkbox,
   Button,
+  Typography,
+  Box,
 } from "@mui/material";
 import theme from "../config/Theme";
 import AddTask from "./AddTask";
 import { useSelector } from "react-redux";
 
-const dummyData = [
-  {
-    id: 1,
-    heading: "Task 1",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    addedTime: "2022-01-01 10:00:00",
-  },
-  {
-    id: 2,
-    heading: "Task 2",
-    description:
-      "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    addedTime: "2022-01-02 12:30:00",
-  },
-  // Add more dummy data as needed
-];
 
 const TodoList = () => {
   let taskList = useSelector((state) => state.todo.value.data);
@@ -62,8 +48,14 @@ const TodoList = () => {
   };
 
   return (
-    <div>
-      <h1>Todo List</h1>
+    <Box >
+      {/* <Typography
+        sx={{
+          textAlign: "center",
+          fontWeight: 700,
+          fontSize: "29px",
+        }}
+      >ToDo List</Typography> */}
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -72,19 +64,19 @@ const TodoList = () => {
                 <Checkbox
                   indeterminate={
                     selectedTasks.length > 0 &&
-                    selectedTasks.length < dummyData.length
+                    selectedTasks.length < taskList.length
                   }
-                  checked={selectedTasks.length === dummyData.length}
+                  checked={selectedTasks.length === taskList.length}
                   onChange={() =>
-                    selectedTasks.length === dummyData.length
+                    selectedTasks.length === taskList.length
                       ? setSelectedTasks([])
-                      : setSelectedTasks(dummyData.map((task) => task.id))
+                      : setSelectedTasks(taskList.map((task) => task.id))
                   }
                 />
               </TableCell>
-              <TableCell>Heading</TableCell>
+              <TableCell>Title</TableCell>
               <TableCell>Description</TableCell>
-              <TableCell>Added Time</TableCell>
+              <TableCell>Created On</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -104,10 +96,20 @@ const TodoList = () => {
                 </TableRow>
               );
             })}
+            {taskList.length === 0 ? <TableRow sx={{
+              height:"600px"
+            }}> 
+              <TableCell colSpan={'4'}
+                sx={{
+                  textAlign: "center"
+                }} >
+                No Data ! Add a task
+              </TableCell>
+            </TableRow> : ""}
           </TableBody>
         </Table>
       </TableContainer>
-      <div style={{ marginTop: "16px", gap: "15px", display: "flex" }}>
+      <Box sx={{ marginTop: "16px", gap: "15px", display: "flex" }}>
         <Button
           variant="contained"
           color="secondary"
@@ -144,8 +146,8 @@ const TodoList = () => {
           New Task
         </Button>
         <AddTask open={addModalOpen} setOpen={setAddModalOpen} />
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

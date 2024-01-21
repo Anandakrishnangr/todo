@@ -3,17 +3,15 @@ import { createSlice } from '@reduxjs/toolkit';
 let userSlice = createSlice({
     name: 'user',
     initialState: {
-        value: {
-            UserName: null,
-        },
+        UserName: null,
+
     },
     reducers: {
         addUser: (state, action) => {
             try {
                 console.log(action.payload);
-                let item = action.payload
-                state.value.Country = item.Country
-                state.value.quickLocation = item.quickLocation
+                let userName = action.payload
+                state.UserName = userName
             } catch (err) {
                 console.log(err);
             }
@@ -21,6 +19,5 @@ let userSlice = createSlice({
     },
 });
 
-export const { addUser
- } = userSlice.actions;
+export const { addUser } = userSlice.actions;
 export default userSlice.reducer;

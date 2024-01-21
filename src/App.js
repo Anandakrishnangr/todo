@@ -18,7 +18,7 @@ function App() {
     
     setTimeout(() => {
       dispatch(updateApp(false))
-    }, 400);
+    }, 1000);
     return () => {
 
     }
