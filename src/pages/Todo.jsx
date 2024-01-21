@@ -11,10 +11,12 @@ import {
   Button,
   Typography,
   Box,
+  IconButton,
 } from "@mui/material";
 import theme from "../config/Theme";
 import AddTask from "./AddTask";
 import { useSelector } from "react-redux";
+import { Edit } from "@mui/icons-material";
 
 
 const TodoList = () => {
@@ -60,7 +62,7 @@ const TodoList = () => {
         <Table>
           <TableHead>
             <TableRow sx={{ background: `${theme.palette.primary.main}5c` }}>
-              <TableCell>
+              <TableCell width={'20px'}>
                 <Checkbox
                   indeterminate={
                     selectedTasks.length > 0 &&
@@ -74,13 +76,16 @@ const TodoList = () => {
                   }
                 />
               </TableCell>
+              <TableCell width={'20px'}>SI</TableCell>
+              <TableCell>Created On</TableCell>
               <TableCell>Title</TableCell>
               <TableCell>Description</TableCell>
-              <TableCell>Created On</TableCell>
+              <TableCell></TableCell>
+
             </TableRow>
           </TableHead>
           <TableBody>
-            {taskList.map((task) => {
+            {taskList.map((task, index) => {
               console.log(task);
               return (
                 <TableRow key={task.id}>
@@ -90,15 +95,24 @@ const TodoList = () => {
                       onChange={() => handleCheckboxChange(task.id)}
                     />
                   </TableCell>
-                  <TableCell> Task {task.id}</TableCell>
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>{task.title}</TableCell>
                   <TableCell>{task.description}</TableCell>
                   <TableCell>{task.addedTime.toString()}</TableCell>
+                  <TableCell>
+                    <IconButton type="submit" color="primary" aria-label="Next" onClick={() => {
+                      setAddModalOpen(task.id)
+                    }} >
+                      <Edit />
+                    </IconButton>
+                  </TableCell>
+
                 </TableRow>
               );
             })}
             {taskList.length === 0 ? <TableRow sx={{
-              height:"600px"
-            }}> 
+              height: "600px"
+            }}>
               <TableCell colSpan={'4'}
                 sx={{
                   textAlign: "center"
@@ -140,7 +154,7 @@ const TodoList = () => {
           variant="contained"
           //   startIcon={<ArchiveIcon />}
           onClick={() => {
-            setAddModalOpen(true);
+            setAddModalOpen(taskList[taskList.length - 1]?.id >= 0 ? taskList[taskList.length - 1]?.id + 1 : 1)
           }}
         >
           New Task

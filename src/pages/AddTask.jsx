@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import { TextField, Typography, Modal, Backdrop, Box } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addTask } from "../redux/Todo/todoSlice";
 
 const style = {
@@ -17,18 +17,22 @@ const style = {
   borderRadius: 3,
 };
 const AddTask = (props) => {
+  let allTask = useSelector((state)=>state.todo)
   const handleClose = () => {
     props.setOpen(false);
   };
   let dispatch = useDispatch();
-  let [task, setTask] = useState("");
+  let [task, setTask] = useState({
+    title: '',
+    discription: ""
+  });
   return (
     <Backdrop
       sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-      open={props.open}
+      open={props.open>0?true:false}
     >
       <Modal
-        open={props.open}
+         open={props.open>0?true:false}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
@@ -41,7 +45,13 @@ const AddTask = (props) => {
             <TextField
               sx={{ m: 1 }}
               onChange={(e) => {
-                setTask(e.target.value);
+                setTask((prev) => ({ ...prev, title: e.target.value }));
+              }}
+            />
+            <TextField
+              sx={{ m: 1 }}
+              onChange={(e) => {
+                setTask((prev) => ({ ...prev, discription: e.target.value }));
               }}
             />
             <Button
