@@ -10,7 +10,7 @@ import NavBar from '../components/NavBar'
 import { Box } from '@mui/material'
 
 const RouteMap = () => {
-    let userName = useSelector((state) => state.user.UserName)
+    let userName = useSelector((state) => state?.user?.UserName)
     if (userName) {
         return (
             <Box>

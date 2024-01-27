@@ -11,7 +11,7 @@ import { updateApp } from './redux/Todo/appSlice';
 console.log(weatherkey)
 function App() {
 
-  let splash = useSelector((state) => state.app.value.splash)
+  let splash = useSelector((state) => state?.app?.value?.splash)
   let dispatch = useDispatch()
   console.log(splash)
   useEffect(() => {

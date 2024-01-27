@@ -14,6 +14,8 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Logout } from '@mui/icons-material';
+import { presistor } from '../redux/store';
 
 const pages = ['About', 'Contact',];
 const settings = ['Profile', 'Logout'];
@@ -38,6 +40,10 @@ function NavBar() {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+    const Logout = () => {
+        presistor.purge()
+        // window.localStorage
+    }
 
     return (
         <AppBar position="static">
@@ -64,7 +70,7 @@ function NavBar() {
             TODO
           </Typography> */}
 
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' },marginLeft:"5px" }}>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, marginLeft: "5px" }}>
                         <IconButton
                             size="large"
                             aria-label="account of current user"
@@ -157,7 +163,11 @@ function NavBar() {
                             >
                                 {settings.map((setting) => (
                                     <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                        <Typography textAlign="center">{setting}</Typography>
+                                        <Typography textAlign="center"
+
+                                            // onClick={setting.onClick ? setting.onClick : null} 
+                                            onClick={() => Logout()}
+                                        >{setting}</Typography>
                                     </MenuItem>
                                 ))}
                             </Menu>
