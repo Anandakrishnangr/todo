@@ -117,7 +117,7 @@ const TodoList = () => {
               );
             })}
             {taskList.length === 0 ? <TableRow sx={{
-              height: "600px"
+              height: "5  00px"
             }}>
               <TableCell colSpan={'4'}
                 sx={{
