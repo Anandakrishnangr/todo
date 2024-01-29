@@ -16,6 +16,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Logout } from '@mui/icons-material';
 import { presistor } from '../redux/store';
+import {  updateKey } from '..';
 
 const pages = ['About', 'Contact',];
 const settings = ['Profile', 'Logout'];
@@ -42,6 +43,7 @@ function NavBar() {
     };
     const Logout = () => {
         presistor.purge()
+        updateKey()
         // window.localStorage
     }
 
