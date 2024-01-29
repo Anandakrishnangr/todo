@@ -44,7 +44,7 @@ function NavBar() {
     const Logout = () => {
         presistor.purge()
         updateKey()
-        // window.localStorage
+        window.location.reload()
     }
 
     return (

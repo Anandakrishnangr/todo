@@ -12,11 +12,11 @@ let keyUpdate = null
 const Project = () => {
   const [reduxKey, setreduxKey] = useState(0)
   keyUpdate = { update: setreduxKey }
-  return <Provider key={reduxKey} store={store}>
-    <PersistGate loading={null} persistor={presistor}>
+  return   <PersistGate loading={null} persistor={presistor}>
+  <Provider key={reduxKey} store={store}>
       <App />
-    </PersistGate>
   </Provider>
+    </PersistGate>
 }
 
 root.render(
