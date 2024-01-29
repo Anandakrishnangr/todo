@@ -17,7 +17,7 @@ import theme from "../config/Theme";
 import AddTask from "./AddTask";
 import { useSelector, useDispatch } from "react-redux";
 import { Edit } from "@mui/icons-material";
-import { deleteTask } from "../redux/Todo/todoSlice";
+import { deleteTask, markAsCompletedTask } from "../redux/Todo/todoSlice";
 import moment from "moment";
 
 const TodoList = () => {
@@ -38,12 +38,24 @@ const TodoList = () => {
   const handleDelete = () => {
     // Implement delete logic using selectedTasks
     console.log("Delete tasks:", selectedTasks);
+    dispatch(deleteTask(selectedTasks));
     setSelectedTasks([]);
   };
 
   const handleMarkAsCompleted = () => {
     // Implement mark as completed logic using selectedTasks
     console.log("Mark as completed:", selectedTasks);
+    let updatedTasks = taskList.map((elem) => {
+      console.log(selectedTasks,elem.id)
+      console.log(selectedTasks.find((el) => el == elem.id))
+      if (selectedTasks.find((el) => el == elem.id)) {
+        return { ...elem, status: "completed" }
+      }else{
+        return { ...elem }
+      }
+    })
+    console.log(updatedTasks)
+    dispatch(markAsCompletedTask(updatedTasks));
     setSelectedTasks([]);
   };
 
@@ -83,8 +95,8 @@ const TodoList = () => {
               <TableCell width={'20px'}>SI</TableCell>
               <TableCell>Title</TableCell>
               <TableCell>Description</TableCell>
-              <TableCell>Created On</TableCell>
-              <TableCell></TableCell>
+              <TableCell width={'200px'}>Created On</TableCell>
+              <TableCell width={'20px'}></TableCell>
 
             </TableRow>
           </TableHead>
@@ -92,7 +104,7 @@ const TodoList = () => {
             {taskList.map((task, index) => {
               console.log(task);
               return (
-                <TableRow key={task.id}>
+                <TableRow className={`${task.status === 'completed' ? 'completed-todo' : ''}`} key={task.id}>
                   <TableCell>
                     <Checkbox
                       checked={selectedTasks.includes(task.id)}
@@ -127,11 +139,11 @@ const TodoList = () => {
                   textAlign: "center",
                 }}
               >
-              
-                  No Data ! Add a task
-                </TableCell>
-              </TableRow>
-             : 
+
+                No Data ! Add a task
+              </TableCell>
+            </TableRow>
+              :
               ""
             }
           </TableBody>
@@ -144,7 +156,6 @@ const TodoList = () => {
           //   startIcon={<DeleteIcon />}
           onClick={() => {
             handleDelete();
-            dispatch(deleteTask(selectedTasks));
             // console.log(selectedTasks, selectedId);
           }}
           disabled={selectedTasks.length === 0}
@@ -160,14 +171,14 @@ const TodoList = () => {
         >
           Mark as Completed
         </Button>
-        <Button
+        {/* <Button
           variant="contained"
           //   startIcon={<ArchiveIcon />}
           onClick={handleArchive}
           disabled={selectedTasks.length === 0}
         >
           Archive
-        </Button>
+        </Button> */}
         <Button
           variant="contained"
           //   startIcon={<ArchiveIcon />}
