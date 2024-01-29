@@ -62,3 +62,7 @@
   -ms-overflow-style: none;
   scrollbar-width: none; /* Firefox */
 }
+.completed-todo{
+  text-decoration:line-through !important ;
+  background-color: aquamarine !important;
+}

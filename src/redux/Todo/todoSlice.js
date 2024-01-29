@@ -33,9 +33,17 @@ let todoSlice = createSlice({
             } catch (error) {
                 console.log(error)
             }
+        },
+        markAsCompletedTask: (state, action) => {
+            try {
+                state = action.payload
+                return state
+            } catch (error) {
+
+            }
         }
     },
 });
 
-export const { addTask, deleteTask, updateTask } = todoSlice.actions;
+export const { addTask, deleteTask, updateTask, markAsCompletedTask } = todoSlice.actions;
 export default todoSlice.reducer;
