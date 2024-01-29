@@ -1,17 +1,7 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { Typography, CardContent, Card } from '@mui/material';
-
-const cardStyle = {
-  minWidth: 300,
-  maxWidth: 400,
-  margin: 'auto',
-  marginTop: 20,
-  padding: 16,
-  textAlign: 'center',
-  boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
-  borderRadius: 8,
-};
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Typography, CardContent, Card } from "@mui/material";
+// import day from "..";
 
 const convertToFahrenheit = (temperatureInCelsius) => {
   return (temperatureInCelsius - 273.15).toFixed(0);
@@ -19,7 +9,7 @@ const convertToFahrenheit = (temperatureInCelsius) => {
 
 const formatTime = (timestamp) => {
   const date = new Date(timestamp * 1000);
-  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 };
 
 const formatDate = (timestamp) => {
@@ -29,9 +19,9 @@ const formatDate = (timestamp) => {
 
 const WeatherCard = () => {
   const [weatherDetails, setWeatherDetails] = useState({
-    city: 'Sample City',
+    city: "Sample City",
     temperature: 25,
-    description: 'Partly Cloudy',
+    description: "Partly Cloudy",
     humidity: 60,
     windSpeed: 10,
     sunrise: 0,
@@ -40,9 +30,27 @@ const WeatherCard = () => {
     currentDate: 0,
   });
 
+  const cardStyle = {
+    minWidth: 300,
+    maxWidth: 400,
+    margin: "auto",
+    marginTop: 20,
+    padding: 16,
+    // textAlign: "center",
+    boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
+    borderRadius: 8,
+    color: "white",
+    background:
+      weatherDetails.currentTime <= weatherDetails.sunrise
+        ? `url(/day.jpg)`
+        : `url(/night.jpg)`,
+    backgroundSize: "100%",
+  };
   useEffect(() => {
     axios
-      .get('https://api.openweathermap.org/data/2.5/weather?lat=9.93&lon=76.26&appid=0ef514e0db4ee86968a309edd698fede')
+      .get(
+        "https://api.openweathermap.org/data/2.5/weather?lat=9.93&lon=76.26&appid=0ef514e0db4ee86968a309edd698fede"
+      )
       .then((response) => {
         const mainWeather = response.data.weather[0];
         const mainDetails = response.data.main;
@@ -71,28 +79,91 @@ const WeatherCard = () => {
     <div>
       <Card style={cardStyle}>
         <CardContent>
-          <Typography variant="h5" component="div">
-            {weatherDetails.city}
+          <div style={{ display: "flex" }}>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{
+                flex: 1,
+                position: "relative",
+                top: "0",
+                left: "0",
+              }}
+            >
+              {weatherDetails.city}
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              sx={{
+                flex: 1,
+                position: "relative",
+                top: "0",
+                right: "0",
+              }}
+            >
+              {weatherDetails.currentDate} - {weatherDetails.currentTime}
+            </Typography>
+          </div>
+
+          <Typography
+            color={
+              weatherDetails.currentTime >= weatherDetails.sunrise
+                ? "textSecondary"
+                : "white"
+            }
+            sx={{
+              position: "relative",
+              top: "50%",
+              left: "50%",
+              transform: "traslate(-50% -50%)",
+              fontSize: "40px",
+            }}
+          >
+            {weatherDetails.temperature}°C
           </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
-            {weatherDetails.currentDate} - {weatherDetails.currentTime}
-          </Typography>
-          <Typography color="textSecondary">
-            Temperature: {weatherDetails.temperature}°C
-          </Typography>
-          <Typography color="textSecondary">
+          <Typography
+            color={
+              weatherDetails.currentTime >= weatherDetails.sunrise
+                ? "textSecondary"
+                : "white"
+            }
+          >
             Description: {weatherDetails.description}
           </Typography>
-          <Typography color="textSecondary">
+          <Typography
+            color={
+              weatherDetails.currentTime >= weatherDetails.sunrise
+                ? "textSecondary"
+                : "white"
+            }
+          >
             Humidity: {weatherDetails.humidity}%
           </Typography>
-          <Typography color="textSecondary">
+          <Typography
+            color={
+              weatherDetails.currentTime >= weatherDetails.sunrise
+                ? "textSecondary"
+                : "white"
+            }
+          >
             Wind Speed: {weatherDetails.windSpeed} km/h
           </Typography>
-          <Typography color="textSecondary">
+          <Typography
+            color={
+              weatherDetails.currentTime >= weatherDetails.sunrise
+                ? "textSecondary"
+                : "white"
+            }
+          >
             Sunrise: {weatherDetails.sunrise}
           </Typography>
-          <Typography color="textSecondary">
+          <Typography
+            color={
+              weatherDetails.currentTime >= weatherDetails.sunrise
+                ? "textSecondary"
+                : "white"
+            }
+          >
             Sunset: {weatherDetails.sunset}
           </Typography>
           {/* Display additional information here */}
