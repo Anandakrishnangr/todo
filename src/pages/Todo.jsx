@@ -18,9 +18,11 @@ import AddTask from "./AddTask";
 import { useSelector, useDispatch } from "react-redux";
 import { Edit } from "@mui/icons-material";
 import { deleteTask } from "../redux/Todo/todoSlice";
+import moment from "moment";
 
 const TodoList = () => {
-  let taskList = useSelector((state) => state.todo.data);
+  let taskList = useSelector((state) => state.todo);
+  console.log(taskList)
   const [selectedTasks, setSelectedTasks] = useState([]);
   const [addModalOpen, setAddModalOpen] = useState(false);
   const handleCheckboxChange = (taskId) => {
@@ -79,9 +81,9 @@ const TodoList = () => {
                 />
               </TableCell>
               <TableCell width={'20px'}>SI</TableCell>
-              <TableCell>Created On</TableCell>
               <TableCell>Title</TableCell>
               <TableCell>Description</TableCell>
+              <TableCell>Created On</TableCell>
               <TableCell></TableCell>
 
             </TableRow>
@@ -104,7 +106,7 @@ const TodoList = () => {
                   <TableCell>{index + 1}</TableCell>
                   <TableCell>{task.title}</TableCell>
                   <TableCell>{task.description}</TableCell>
-                  <TableCell>{task.addedTime.toString()}</TableCell>
+                  <TableCell>{moment(task.addedTime).fromNow()}</TableCell>
                   <TableCell>
                     <IconButton type="submit" color="primary" aria-label="Next" onClick={() => {
                       setAddModalOpen(task.id)
@@ -119,7 +121,7 @@ const TodoList = () => {
             {taskList.length === 0 ? <TableRow sx={{
               height: "5  00px"
             }}>
-              <TableCell colSpan={'4'}
+              <TableCell colSpan={'6'}
                 sx={{
                   height: "500px",
                   textAlign: "center",

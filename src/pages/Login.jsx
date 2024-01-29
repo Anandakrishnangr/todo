@@ -14,7 +14,7 @@ const LoginPage = () => {
         errorMessage: ''
     })
     let navigate = useNavigate()
-    let userStates = useSelector((state) => state.user.UserName)
+    let userStates = useSelector((state) => state?.user?.UserName)
     console.log(userStates)
 
 
