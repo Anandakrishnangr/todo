@@ -18,8 +18,28 @@ const formatDate = (timestamp) => {
 };
 
 const WeatherCard = () => {
+
+
+  function initGeolocation() {
+    return new Promise((resolver, reject) => {
+      if (navigator.geolocation) {
+        // Call getCurrentPosition with success and failure callbacks
+        navigator.geolocation.getCurrentPosition((response) => {
+          const latitude = response.coords.latitude;
+          const longitude = response.coords.longitude;
+
+          resolver({ latitude, longitude })
+        })
+      }
+      else {
+        alert("Sorry, your browser does not support geolocation services.");
+      }
+    })
+
+  }
+
   const [weatherDetails, setWeatherDetails] = useState({
-    city: "Sample City",
+    city: "Loading...",
     temperature: 25,
     description: "Partly Cloudy",
     humidity: 60,
@@ -46,10 +66,13 @@ const WeatherCard = () => {
         : `url(/night.jpg)`,
     backgroundSize: "100%",
   };
-  useEffect(() => {
+  let fetchWeather = async () => {
+    let response = await initGeolocation()
+    let defaultLat = response.latitude ? response.latitude : 9.93
+    let defaultLng = response.longitude ? response.longitude : 76.26
     axios
       .get(
-        "https://api.openweathermap.org/data/2.5/weather?lat=9.93&lon=76.26&appid=0ef514e0db4ee86968a309edd698fede"
+        `https://api.openweathermap.org/data/2.5/weather?lat=${defaultLat}&lon=${defaultLng}&appid=0ef514e0db4ee86968a309edd698fede`
       )
       .then((response) => {
         const mainWeather = response.data.weather[0];
@@ -73,6 +96,9 @@ const WeatherCard = () => {
       .catch((error) => {
         console.log(error);
       });
+  }
+  useEffect(() => {
+    fetchWeather()
   }, []);
 
   return (

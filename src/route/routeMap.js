@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux'
 import ToDo from '../layouts/toDO'
 import NavBar from '../components/NavBar'
 import { Box } from '@mui/material'
+import About from '../pages/About'
 
 const RouteMap = () => {
     let userName = useSelector((state) => state?.user?.UserName)
@@ -19,6 +20,8 @@ const RouteMap = () => {
                     {/* <Route element={<GetStarted />} path='/' /> */}
                     <Route element={<TodoList />} path='/todo'  ></Route>
                     <Route element={<ToDo />} path='/'  ></Route>
+                    <Route element={<About />} path='/about'  ></Route>
+
 
                 </Routes>
             </Box>

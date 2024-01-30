@@ -66,3 +66,6 @@
   text-decoration:line-through !important ;
   background-color: aquamarine !important;
 }
+a{
+  text-decoration: none;
+}

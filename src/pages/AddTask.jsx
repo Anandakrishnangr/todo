@@ -57,7 +57,7 @@ const AddTask = (props) => {
       console.log('update')
 
       let temp = [...allTask]
-      temp[taskID.index] = { ...temp[taskID.index], title:task.title,description:task.description }
+      temp[taskID.index] = { ...temp[taskID.index], title:task.title,description:task.description,status:'pending' }
       dispatch(
         updateTask(temp)
       )
@@ -80,18 +80,23 @@ const AddTask = (props) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id="modal-modal-title" variant="h6" sx={{paddingY:1}} component="h2">
             Add New Tasks
           </Typography>
           <Box sx={{ display: "flex", flexDirection: "column" }}>
+            Title
             <TextField
               value={task.title}
               sx={{ m: 1 }}
               onChange={(e) => {
                 setTask((prev) => ({ ...prev, title: e.target.value }));
               }}
+              required={true}
             />
+            Description
             <TextField
+            multiline
+            minRows={3}
               value={task.description}
               sx={{ m: 1 }}
               onChange={(e) => {
