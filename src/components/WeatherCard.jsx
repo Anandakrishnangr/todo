@@ -18,8 +18,6 @@ const formatDate = (timestamp) => {
 };
 
 const WeatherCard = () => {
-
-
   function initGeolocation() {
     return new Promise((resolver, reject) => {
       if (navigator.geolocation) {
@@ -28,14 +26,12 @@ const WeatherCard = () => {
           const latitude = response.coords.latitude;
           const longitude = response.coords.longitude;
 
-          resolver({ latitude, longitude })
-        })
-      }
-      else {
+          resolver({ latitude, longitude });
+        });
+      } else {
         alert("Sorry, your browser does not support geolocation services.");
       }
-    })
-
+    });
   }
 
   const [weatherDetails, setWeatherDetails] = useState({
@@ -67,9 +63,9 @@ const WeatherCard = () => {
     backgroundSize: "100%",
   };
   let fetchWeather = async () => {
-    let response = await initGeolocation()
-    let defaultLat = response.latitude ? response.latitude : 9.93
-    let defaultLng = response.longitude ? response.longitude : 76.26
+    let response = await initGeolocation();
+    let defaultLat = response.latitude ? response.latitude : 9.93;
+    let defaultLng = response.longitude ? response.longitude : 76.26;
     axios
       .get(
         `https://api.openweathermap.org/data/2.5/weather?lat=${defaultLat}&lon=${defaultLng}&appid=0ef514e0db4ee86968a309edd698fede`
@@ -96,9 +92,9 @@ const WeatherCard = () => {
       .catch((error) => {
         console.log(error);
       });
-  }
+  };
   useEffect(() => {
-    fetchWeather()
+    fetchWeather();
   }, []);
 
   return (
@@ -148,47 +144,47 @@ const WeatherCard = () => {
             {weatherDetails.temperature}°C
           </Typography>
           <Typography
-            color={
-              weatherDetails.currentTime >= weatherDetails.sunrise
-                ? "textSecondary"
-                : "white"
-            }
+          // color={
+          //   weatherDetails.currentTime >= weatherDetails.sunrise
+          //     ? "textSecondary"
+          //     : "white"
+          // }
           >
             Description: {weatherDetails.description}
           </Typography>
           <Typography
-            color={
-              weatherDetails.currentTime >= weatherDetails.sunrise
-                ? "textSecondary"
-                : "white"
-            }
+          // color={
+          //   weatherDetails.currentTime >= weatherDetails.sunrise
+          //     ? "textSecondary"
+          //     : "white"
+          // }
           >
             Humidity: {weatherDetails.humidity}%
           </Typography>
           <Typography
-            color={
-              weatherDetails.currentTime >= weatherDetails.sunrise
-                ? "textSecondary"
-                : "white"
-            }
+          // color={
+          //   weatherDetails.currentTime >= weatherDetails.sunrise
+          //     ? "textSecondary"
+          //     : "white"
+          // }
           >
             Wind Speed: {weatherDetails.windSpeed} km/h
           </Typography>
           <Typography
-            color={
-              weatherDetails.currentTime >= weatherDetails.sunrise
-                ? "textSecondary"
-                : "white"
-            }
+          // color={
+          //   weatherDetails.currentTime >= weatherDetails.sunrise
+          //     ? "textSecondary"
+          //     : "white"
+          // }
           >
             Sunrise: {weatherDetails.sunrise}
           </Typography>
           <Typography
-            color={
-              weatherDetails.currentTime >= weatherDetails.sunrise
-                ? "textSecondary"
-                : "white"
-            }
+          // color={
+          //   weatherDetails.currentTime >= weatherDetails.sunrise
+          //     ? "textSecondary"
+          //     : "white"
+          // }
           >
             Sunset: {weatherDetails.sunset}
           </Typography>
