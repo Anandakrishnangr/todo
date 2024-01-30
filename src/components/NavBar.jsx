@@ -150,7 +150,7 @@ function NavBar() {
                             <Typography>{userName}</Typography>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    <Avatar alt="Rmemy Sharp" src="/static/images/avatar/2.jpg" />
+                                    <Avatar alt="A" src="/avatar.png" />
                                 </IconButton>
                             </Tooltip>
                             <Menu
