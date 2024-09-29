@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/Anandakrishnangr/todo/static/css/main.cc32d6aa.css",
-    "main.js": "/Anandakrishnangr/todo/static/js/main.5de64581.js",
-    "static/js/787.1a5ae052.chunk.js": "/Anandakrishnangr/todo/static/js/787.1a5ae052.chunk.js",
-    "static/media/logo.svg": "/Anandakrishnangr/todo/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
-    "index.html": "/Anandakrishnangr/todo/index.html",
-    "main.cc32d6aa.css.map": "/Anandakrishnangr/todo/static/css/main.cc32d6aa.css.map",
-    "main.5de64581.js.map": "/Anandakrishnangr/todo/static/js/main.5de64581.js.map",
-    "787.1a5ae052.chunk.js.map": "/Anandakrishnangr/todo/static/js/787.1a5ae052.chunk.js.map"
+    "main.css": "/static/css/main.cc32d6aa.css",
+    "main.js": "/static/js/main.bac40e75.js",
+    "static/js/787.1a5ae052.chunk.js": "/static/js/787.1a5ae052.chunk.js",
+    "static/media/logo.svg": "/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/index.html",
+    "main.cc32d6aa.css.map": "/static/css/main.cc32d6aa.css.map",
+    "main.bac40e75.js.map": "/static/js/main.bac40e75.js.map",
+    "787.1a5ae052.chunk.js.map": "/static/js/787.1a5ae052.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.cc32d6aa.css",
-    "static/js/main.5de64581.js"
+    "static/js/main.bac40e75.js"
   ]
 }
